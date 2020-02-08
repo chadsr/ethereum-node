@@ -1,0 +1,87 @@
+version: '3'
+
+services:
+
+    geth:
+        build:
+            context: ./go-ethereum
+            dockerfile: Dockerfile
+        image: geth
+        ports:
+            - 8545:8545
+        env_file:
+            - .config.env
+        command: "--rpc --rpcaddr 0.0.0.0 \
+        --datadir /ethereum \
+        --keystore /ethereum/keystore \
+        --metrics \
+        --metrics.influxdb.endpoint http://influxdb:8086 \
+        --metrics.influxdb.username ${INFLUXDB_USER} \
+        --metrics.influxdb.password ${INFLUXDB_USER_PASSWORD} \
+        --metrics.influxdb.database ${INFLUXDB_DB} \
+        --metrics.influxdb.tags type=geth \
+        --verbosity 4"
+        volumes:
+            -  ${ETH_DATA_DIR}:/ethereum
+        networks:
+            - default
+
+    swarm:
+        build:
+            context: ./swarm
+            dockerfile: Dockerfile
+        image: swarm
+        ports:
+            - 8500:8500
+        env_file:
+            - .config.env
+        command: "--datadir /ethereum \
+        --keystore /ethereum/keystore \
+        --ens-api /ethereum/geth/geth.ipc \
+        --metrics \
+        --metrics.influxdb.endpoint http://influxdb:8086 \
+        --metrics.influxdb.username ${INFLUXDB_USER} \
+        --metrics.influxdb.password ${INFLUXDB_USER_PASSWORD} \
+        --metrics.influxdb.database ${INFLUXDB_DB} \
+        --metrics.influxdb.tags type=swarm \
+        --verbosity 4 \
+        --bzzaccount ${ETH_ACCOUNT}"
+        volumes:
+            -  ${ETH_DATA_DIR}:/ethereum
+        networks:
+            - default
+
+    influxdb:
+        image: influxdb:latest
+        container_name: influxdb
+        ports:
+            - "8083:8083"
+            - "8086:8086"
+            - "8090:8090"
+        env_file:
+            - .config.env
+        networks:
+            - default
+        volumes:
+            - influx-data:/var/lib/influxdb
+
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        ports:
+            - "3000:3000"
+        env_file:
+            - 'env.grafana'
+        user: "472"
+        links:
+            - influxdb
+        volumes:
+            - grafana-data:/var/lib/grafana
+
+volumes:
+    influx-data:
+    grafana-data:
+
+networks:
+    default:
+        driver: bridge
