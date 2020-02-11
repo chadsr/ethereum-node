@@ -37,7 +37,7 @@ services:
             - .config.env
         command: "--datadir /ethereum \
         --keystore /ethereum/keystore \
-        --ens-api /ethereum/geth/geth.ipc \
+        --ens-api /ethereum/geth.ipc \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USER} \
