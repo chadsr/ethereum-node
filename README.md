@@ -70,6 +70,3 @@ sudo journalctl -f -u ethereum.service
 
 ### Swarm
 **Current version:** v0.5.6
-
-#### Modifications
-The dockerfile has been modified to utilise the locally built geth image, instead of pulling `ethereum/client-go`. As mentioned in the warning, this allows for other non-supported architectures such as ARM.
