@@ -32,7 +32,10 @@ services:
             dockerfile: Dockerfile
         image: swarm
         ports:
+            - 8546:8546
             - 8500:8500
+            - 6060:6060
+            - 30399:30399
         env_file:
             - .config.env
         command: "--datadir /ethereum \
