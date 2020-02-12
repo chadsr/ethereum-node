@@ -25,7 +25,8 @@ services:
         --metrics.influxdb.password ${INFLUXDB_USER_PASSWORD} \
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=geth \
-        --verbosity ${LOG_VERBOSITY_LEVEL}"
+        --verbosity ${LOG_VERBOSITY_LEVEL} \
+        --nousb"
         volumes:
             -  ${ETH_DATA_DIR}:/ethereum
         networks:
