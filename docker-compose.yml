@@ -10,15 +10,15 @@ services:
         container_name: geth
         restart: always
         ports:
-            - 8545:8545
-            - 8546:8546
-            - 8547:8547
-            - 30303:30303
+            - 8545:8545 # HTTP RPC
+            - 8546:8546 # Websocket RPC
+            - 8547:8547 # GraphQL
+            - 30303:30303 # UPnP
         env_file:
             - .config.env
         command: "--rpc --rpcaddr 0.0.0.0 \
-        --datadir /ethereum \
-        --keystore /ethereum/keystore \
+        --datadir /data \
+        --keystore /data/keystore \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USER} \
@@ -26,9 +26,11 @@ services:
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=geth \
         --verbosity ${LOG_VERBOSITY_LEVEL} \
+        --ipcpath /ipc \
         --nousb"
         volumes:
-            -  ${ETH_DATA_DIR}:/ethereum
+            -  ${ETH_DATA_DIR}:/data
+            -  ${ETH_IPC_DIR}:/ipc
         networks:
             - default
 
@@ -40,15 +42,14 @@ services:
         container_name: swarm
         restart: always
         ports:
-            - 8548:8546
-            - 8500:8500
-            - 6060:6060
-            - 30399:30399
+            - 8548:8546 # Websocket RPC
+            - 8500:8500 # HTTP
+            - 30399:30399 # UPnP
         env_file:
             - .config.env
-        command: "--datadir /ethereum \
-        --keystore /ethereum/keystore \
-        --ens-api /ethereum/geth.ipc \
+        command: "--datadir /data \
+        --keystore /data/keystore \
+        --ens-api /ipc/geth.ipc \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USER} \
@@ -59,7 +60,8 @@ services:
         --bzzaccount ${ETH_ACCOUNT} \
         --password ${ETH_PASSWORD_FILE}"
         volumes:
-            -  ${ETH_DATA_DIR}:/ethereum
+            -  ${ETH_DATA_DIR}:/data
+            -  ${ETH_IPC_DIR}:/ipc
         networks:
             - default
 
@@ -68,9 +70,7 @@ services:
         container_name: influxdb
         restart: always
         ports:
-            - "8083:8083"
-            - "8086:8086"
-            - "8090:8090"
+            - "8086:8086" # HTTP API
         env_file:
             - .config.env
         networks:
@@ -83,7 +83,7 @@ services:
         container_name: grafana
         restart: always
         ports:
-            - "3000:3000"
+            - "3000:3000" # HTTP
         env_file:
             - 'env.grafana'
         user: "472"

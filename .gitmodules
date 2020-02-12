@@ -1,6 +1,6 @@
 [submodule "go-ethereum"]
-	path = go-ethereum
-	url = https://github.com/ethereum/go-ethereum.git
+path = go-ethereum
+url = https://github.com/ethereum/go-ethereum.git
 [submodule "swarm"]
-	path = swarm
-	url = https://github.com/ethersphere/swarm.git
+path = swarm
+url = https://github.com/ethersphere/swarm.git

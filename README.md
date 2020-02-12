@@ -3,7 +3,8 @@
 A dockerized Ethereum related node setup, using docker-compose.
 
 **Warning(s):**
-This docker-compose setup builds images locally for now, so that the binaries are compiled for the local architecture. Make sure the system has enough resources to do the compilation.
+- The docker-compose setup builds images locally, since official docker images are only built for x86_64 and I wanted this to compile onto ARM variants as well. Make sure the system has enough resources to do the compilation (500MB of RAM should do).
+- This setup was designed for running on locally networked hardware. I take no responsibility if services are exposed to the Internet and you are not adequately firewalled.
 
 ## Config
 Secrets are handled through environment variables, which can be set by renaming `.config.env.example` to `.config.env` and changing account values to your own.
