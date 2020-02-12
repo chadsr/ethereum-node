@@ -4,3 +4,6 @@ url = https://github.com/ethereum/go-ethereum.git
 [submodule "swarm"]
 path = swarm
 url = https://github.com/ethersphere/swarm.git
+[submodule "blockscout"]
+path = blockscout
+url = https://github.com/poanetwork/blockscout.git

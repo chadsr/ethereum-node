@@ -80,3 +80,8 @@ Since this setup is designed to build the docker images locally, it should work 
 
 ### Swarm
 **Current version:** v0.5.6
+
+### BlockScout
+**Current version:** v3.0.0-beta
+
+BlockScout is set up to NOT index anything to a database, so it will be rather slow. According to [their documentation](https://docs.blockscout.com/for-developers/information-and-settings/database-storage-requirements), indexing would require around 4500GiB, which I see as unrealistic for most use-cases of this repo. Feel free to enable it yourself in `env.blockscout` if you have that sort of storage available.

@@ -92,6 +92,22 @@ services:
         volumes:
             - grafana-data:/var/lib/grafana
 
+    blockscout:
+        build:
+            context: ./blockscout/docker
+            dockerfile: Dockerfile
+        image: blockscout
+        container_name: blockscout
+        restart: always
+        env_file:
+            - env.blockscout
+        ports:
+        - 4000:4000 # HTTP
+        volumes:
+            -  ${ETH_IPC_DIR}:/ipc
+        networks:
+            - default
+
 volumes:
     influx-data:
     grafana-data:
