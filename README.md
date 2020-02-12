@@ -14,13 +14,19 @@ Secrets are handled through environment variables, which can be set by renaming 
 git clone https://github.com/Chadsr/ethereum_node.git
 ```
 
-2. Copy the example config to `.config.env`:
+2. Init and update Git submodules
+```
+git submodule init
+git submodule update
+```
+
+3. Copy the example config to `.config.env`:
 ```
 cp .config.env.example .config.env
 ```
 
 
-3. Edit the values in `.config.env` to your preference. 
+4. Edit the values in `.config.env` to your preference. 
 
 **Note: An Ethereum account will NOT automatically be generated. It is assumed that you have already [created one](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts#creating-an-account).**
 
