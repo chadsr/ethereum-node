@@ -25,7 +25,7 @@ services:
         --metrics.influxdb.password ${INFLUXDB_USER_PASSWORD} \
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=geth \
-        --verbosity 4"
+        --verbosity ${LOG_VERBOSITY_LEVEL}"
         volumes:
             -  ${ETH_DATA_DIR}:/ethereum
         networks:
@@ -54,7 +54,7 @@ services:
         --metrics.influxdb.password ${INFLUXDB_USER_PASSWORD} \
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=swarm \
-        --verbosity 4 \
+        --verbosity ${LOG_VERBOSITY_LEVEL} \
         --bzzaccount ${ETH_ACCOUNT} \
         --password ${ETH_PASSWORD_FILE}"
         volumes:
