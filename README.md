@@ -70,6 +70,9 @@ sudo journalctl -f -u ethereum.service
 ```
 
 ## Notes
+### Architecture Support
+Since this setup is designed to build the docker images locally, it should work on any common CPU architecture. I am personally running it on aarch64 (ARMv8).
+
 ### Geth
 **Current version:** v1.9.10
 
