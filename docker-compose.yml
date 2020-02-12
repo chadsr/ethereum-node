@@ -11,6 +11,9 @@ services:
         restart: always
         ports:
             - 8545:8545
+            - 8546:8546
+            - 8547:8547
+            - 30303:30303
         env_file:
             - .config.env
         command: "--rpc --rpcaddr 0.0.0.0 \
@@ -36,7 +39,7 @@ services:
         container_name: swarm
         restart: always
         ports:
-            - 8546:8546
+            - 8548:8546
             - 8500:8500
             - 6060:6060
             - 30399:30399
