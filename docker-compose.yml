@@ -26,7 +26,7 @@ services:
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=geth \
         --verbosity ${LOG_VERBOSITY_LEVEL} \
-        --ipcpath /ipc \
+        --ipcpath /ipc/geth.ipc \
         --nousb"
         volumes:
             -  ${ETH_DATA_DIR}:/data
