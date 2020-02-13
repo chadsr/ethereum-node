@@ -18,7 +18,7 @@ services:
             - .config.env
         command: "--rpc --rpcaddr 0.0.0.0 \
         --datadir /data \
-        --keystore /data/keystore \
+        --keystore /keystore \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USER} \
@@ -26,11 +26,12 @@ services:
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=geth \
         --verbosity ${LOG_VERBOSITY_LEVEL} \
-        --ipcpath /ipc \
+        --ipcpath /ipc/geth.ipc \
         --nousb"
         volumes:
-            -  ${ETH_DATA_DIR}:/data
-            -  ${ETH_IPC_DIR}:/ipc
+            - ${KEYSTORE_DIR}:/keystore
+            - ${GETH_DATA_DIR}:/data
+            - ${GETH_IPC_DIR}:/ipc
         networks:
             - default
 
@@ -48,7 +49,7 @@ services:
         env_file:
             - .config.env
         command: "--datadir /data \
-        --keystore /data/keystore \
+        --keystore /keystore \
         --ens-api /ipc/geth.ipc \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
@@ -58,10 +59,12 @@ services:
         --metrics.influxdb.tags type=swarm \
         --verbosity ${LOG_VERBOSITY_LEVEL} \
         --bzzaccount ${ETH_ACCOUNT} \
-        --password ${ETH_PASSWORD_FILE}"
+        --password /password/${ACCOUNT_PASSWORD_FILE_NAME}"
         volumes:
-            -  ${ETH_DATA_DIR}:/data
-            -  ${ETH_IPC_DIR}:/ipc
+            - ${ACCOUNT_PASSWORD_DIR}:/password
+            - ${KEYSTORE_DIR}:/keystore
+            - ${SWARM_DATA_DIR}:/data
+            - ${GETH_IPC_DIR}:/ipc
         networks:
             - default
 
