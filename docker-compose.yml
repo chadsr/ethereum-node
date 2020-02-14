@@ -25,6 +25,10 @@ services:
         --cache.gc ${GETH_CACHE_PERCENT_GC} \
         --gcmode ${GETH_GC_MODE} \
         --maxpeers ${GETH_MAX_PEERS} \
+        --ethash.cachesinmem ${GETH_ETHASH_CACHESINMEM} \
+        --ethash.cachesondisk ${GETH_ETHASH_CACHESONDISK} \
+        --ethash.dagsinmem ${GETH_DAGS_INMEM} \
+        --ethash.dagsondisk ${GETH_DAGS_ONDISK} \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
