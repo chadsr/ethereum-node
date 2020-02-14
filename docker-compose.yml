@@ -19,6 +19,11 @@ services:
         command: "--rpc --rpcaddr 0.0.0.0 \
         --datadir /data \
         --keystore /keystore \
+        --cache ${GETH_CACHE_MB} \
+        --cache.database ${GETH_CACHE_PERCENT_DB}
+        --cache.trie ${GETH_CACHE_PERCENT_TRIE} \
+        --cache.gc ${GETH_CACHE_PERCENT_GC} \
+        --gcmode ${GETH_GC_MODE} \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
@@ -51,6 +56,9 @@ services:
         command: "--datadir /data \
         --keystore /keystore \
         --ens-api /ipc/geth.ipc \
+        --store.path /data \
+        --store.size ${SWARM_STORE_SIZE} \
+        --store.cache.size ${SWARM_STORE_CACHE_SIZE} \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
