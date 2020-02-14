@@ -24,6 +24,7 @@ services:
         --cache.trie ${GETH_CACHE_PERCENT_TRIE} \
         --cache.gc ${GETH_CACHE_PERCENT_GC} \
         --gcmode ${GETH_GC_MODE} \
+        --maxpeers ${GETH_MAX_PEERS} \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
@@ -59,6 +60,7 @@ services:
         --store.path /data \
         --store.size ${SWARM_STORE_SIZE} \
         --store.cache.size ${SWARM_STORE_CACHE_SIZE} \
+        --maxpeers ${SWARM_MAX_PEERS} \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
