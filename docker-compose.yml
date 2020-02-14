@@ -93,6 +93,7 @@ services:
             - "3000:3000" # HTTP
         env_file:
             - 'env.grafana'
+            - '.config.env'
         environment: 
             - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
             - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
@@ -101,6 +102,7 @@ services:
             - influxdb
         volumes:
             - grafana-data:/var/lib/grafana
+            - ./grafana-provisioning:/etc/grafana/provisioning
 
 volumes:
     influx-data:
