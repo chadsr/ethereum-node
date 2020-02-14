@@ -94,9 +94,6 @@ services:
         env_file:
             - 'env.grafana'
             - '.config.env'
-        environment: 
-            - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
-            - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
         user: "472"
         links:
             - influxdb

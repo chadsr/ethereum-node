@@ -9,6 +9,8 @@ A dockerized Ethereum related node setup, using docker-compose.
 ## Config
 Secrets are handled through environment variables, which can be set by renaming `.config.env.example` to `.config.env` and changing account values to your own.
 
+Grafana default credentials are `admin:admin`. Change them as soon as Grafana is up and running.
+
 ## Installing
 1. Clone this repository:
 ```
