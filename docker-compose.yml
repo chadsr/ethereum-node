@@ -35,7 +35,7 @@ services:
         --metrics.influxdb.password ${INFLUXDB_PASSWORD} \
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=geth \
-        --verbosity ${LOG_VERBOSITY_LEVEL} \
+        --verbosity ${GETH_LOG_VERBOSITY_LEVEL} \
         --ipcpath /ipc/geth.ipc \
         --nousb"
         volumes:
@@ -71,7 +71,7 @@ services:
         --metrics.influxdb.password ${INFLUXDB_PASSWORD} \
         --metrics.influxdb.database ${INFLUXDB_DB} \
         --metrics.influxdb.tags type=swarm \
-        --verbosity ${LOG_VERBOSITY_LEVEL} \
+        --verbosity ${SWARM_LOG_VERBOSITY_LEVEL} \
         --bzzaccount ${ETH_ACCOUNT} \
         --password /password/${ACCOUNT_PASSWORD_FILE_NAME}"
         volumes:
