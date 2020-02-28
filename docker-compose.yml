@@ -19,6 +19,7 @@ services:
         command: "--rpc --rpcaddr 0.0.0.0 \
         --datadir /data \
         --keystore /keystore \
+        --syncmode ${GETH_SYNC_MODE} \
         --cache ${GETH_CACHE_MB} \
         --cache.database ${GETH_CACHE_PERCENT_DB}
         --cache.trie ${GETH_CACHE_PERCENT_TRIE} \
