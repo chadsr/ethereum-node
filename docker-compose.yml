@@ -65,6 +65,8 @@ services:
         --store.size ${SWARM_STORE_SIZE} \
         --store.cache.size ${SWARM_STORE_CACHE_SIZE} \
         --maxpeers ${SWARM_MAX_PEERS} \
+        --httpaddr ${SWARM_HTTP_ADDRESS} \
+        --debug \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
