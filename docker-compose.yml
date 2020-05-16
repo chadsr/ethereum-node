@@ -30,6 +30,7 @@ services:
         --ethash.cachesondisk ${GETH_ETHASH_CACHESONDISK} \
         --ethash.dagsinmem ${GETH_DAGS_INMEM} \
         --ethash.dagsondisk ${GETH_DAGS_ONDISK} \
+        --txlookuplimit ${GETH_TX_LOOKUP_LIMIT} \
         --metrics \
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
