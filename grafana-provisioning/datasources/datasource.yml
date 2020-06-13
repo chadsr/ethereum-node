@@ -1,11 +1,22 @@
 apiVersion: 1
 datasources:
-- name: ${INFLUXDB_DB}
+- name: metrics
   type: influxdb
   access: proxy
-  database: ${INFLUXDB_DB}
+  database: ${INFLUXDB_DB_SWARM}
   user: ${INFLUXDB_USERNAME}
   password: ${INFLUXDB_PASSWORD}
   url: http://influxdb:8086
-  isDefault: true
   editable: true
+  jsonData:
+    httpMode: POST
+- name: geth
+  type: influxdb
+  access: proxy
+  database: ${INFLUXDB_DB_GETH}
+  user: ${INFLUXDB_USERNAME}
+  password: ${INFLUXDB_PASSWORD}
+  url: http://influxdb:8086
+  editable: true
+  jsonData:
+    httpMode: POST

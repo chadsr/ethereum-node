@@ -35,8 +35,7 @@ services:
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
         --metrics.influxdb.password ${INFLUXDB_PASSWORD} \
-        --metrics.influxdb.database ${INFLUXDB_DB} \
-        --metrics.influxdb.tags type=geth \
+        --metrics.influxdb.database ${INFLUXDB_DB_GETH} \
         --verbosity ${GETH_LOG_VERBOSITY_LEVEL} \
         --ipcpath /ipc/geth.ipc \
         --nousb"
@@ -73,8 +72,7 @@ services:
         --metrics.influxdb.endpoint http://influxdb:8086 \
         --metrics.influxdb.username ${INFLUXDB_USERNAME} \
         --metrics.influxdb.password ${INFLUXDB_PASSWORD} \
-        --metrics.influxdb.database ${INFLUXDB_DB} \
-        --metrics.influxdb.tags type=swarm \
+        --metrics.influxdb.database ${INFLUXDB_DB_SWARM} \
         --verbosity ${SWARM_LOG_VERBOSITY_LEVEL} \
         --bzzaccount ${ETH_ACCOUNT} \
         --password /password/${ACCOUNT_PASSWORD_FILE_NAME}"
@@ -97,7 +95,6 @@ services:
         environment: 
             - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
             - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
-            - INFLUXDB_DB=${INFLUXDB_DB}
         networks:
             - default
         volumes:
