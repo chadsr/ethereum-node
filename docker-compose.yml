@@ -99,6 +99,7 @@ services:
             - default
         volumes:
             - influx-data:/var/lib/influxdb
+            - ./init_influxdb.iql:/docker-entrypoint-initdb.d/init_influxdb.iql
 
     grafana:
         image: grafana/grafana:latest
