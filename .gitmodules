@@ -4,3 +4,6 @@ url = https://github.com/ethereum/go-ethereum.git
 [submodule "swarm"]
 path = swarm
 url = https://github.com/ethersphere/swarm.git
+[submodule "grafana-provisioning/dashboards/swarm-dashboards"]
+	path = grafana-provisioning/dashboards/swarm-dashboards
+	url = https://github.com/ethersphere/grafana-dashboards.git
