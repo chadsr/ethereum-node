@@ -16,7 +16,8 @@ services:
             - 30303:30303 # UPnP
         env_file:
             - .config.env
-        command: "--rpc --rpcaddr 0.0.0.0 \
+        command: "--http \
+        --http.addr 0.0.0.0 \
         --datadir /data \
         --keystore /keystore \
         --syncmode ${GETH_SYNC_MODE} \
