@@ -5,18 +5,20 @@ datasources:
   access: proxy
   database: ${INFLUXDB_DB_SWARM}
   user: ${INFLUXDB_USERNAME}
-  password: ${INFLUXDB_PASSWORD}
   url: http://influxdb:8086
   editable: true
   jsonData:
     httpMode: POST
+  secureJsonData:
+    password: ${INFLUXDB_PASSWORD}
 - name: geth
   type: influxdb
   access: proxy
   database: ${INFLUXDB_DB_GETH}
   user: ${INFLUXDB_USERNAME}
-  password: ${INFLUXDB_PASSWORD}
   url: http://influxdb:8086
   editable: true
   jsonData:
     httpMode: POST
+  secureJsonData:
+    password: ${INFLUXDB_PASSWORD}
