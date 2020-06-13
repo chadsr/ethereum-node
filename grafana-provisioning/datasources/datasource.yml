@@ -3,7 +3,7 @@ datasources:
 - name: metrics
   type: influxdb
   access: proxy
-  database: ${INFLUXDB_DB_SWARM}
+  database: swarm
   user: ${INFLUXDB_USERNAME}
   url: http://influxdb:8086
   editable: true
@@ -14,7 +14,7 @@ datasources:
 - name: geth
   type: influxdb
   access: proxy
-  database: ${INFLUXDB_DB_GETH}
+  database: geth
   user: ${INFLUXDB_USERNAME}
   url: http://influxdb:8086
   editable: true
