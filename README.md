@@ -11,6 +11,14 @@ Secrets are handled through environment variables, which can be set by renaming 
 
 Grafana default credentials are `admin:admin`. Change them as soon as Grafana is up and running.
 
+## Requirements
+- Adequate storage space (Ideally >300Gb. This is a full-node setup, but could be tweaked otherwise)
+- Minimum of 4GB RAM (If you have 4GB, enable a swap partition to avoid issues!)
+- `systemd` (or some equivalent such as `supervisord`)
+- `docker` (With systemd daemon, or equivalent running)
+- `docker-compose`
+- An [Ethereum account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts#creating-an-account)
+
 ## Installing
 1. Clone this repository:
 ```
