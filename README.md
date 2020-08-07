@@ -37,12 +37,12 @@ cp .config.env.example .config.env
 ```
 
 
-4. Edit the values in `.config.env` to your preference. 
+4. Edit the values in `.config.env` to your preference.
 
 **Note: An Ethereum account will NOT automatically be generated. It is assumed that you have already [created one](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts#creating-an-account).**
 
 ### systemd installation
-An example systemd unit file: 
+An example systemd unit file:
 ```
 [Unit]
 Description=Ethereum Dockerized Services
@@ -54,7 +54,7 @@ EnvironmentFile=/path/to/ethereum_node/.config.env
 WorkingDirectory=/path/to/ethereum_node
 Restart=always
 
-ExecStart=/usr/bin/docker-compose up --build
+ExecStart=/usr/bin/docker-compose -f compose_files/geth.yml -f compose_files/swarm.yml -f compose_files/metrics.yml up --build
 
 ExecStop=/usr/bin/docker-compose down
 
@@ -85,7 +85,7 @@ sudo journalctl -f -u ethereum.service
 Since this setup is designed to build the docker images locally, it should work on any common CPU architecture. I am personally running it on aarch64 (ARMv8).
 
 ### Geth
-**Current version:** v1.9.18
+**Current version:** v1.9.18e
 
 
 ### Swarm

@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+    geth:
+        build:
+            context: ../go-ethereum
+            dockerfile: Dockerfile
+        image: geth
+        container_name: geth
+        restart: always
+        ports:
+            - 8545:8545 # HTTP RPC
+            - 8546:8546 # Websocket RPC
+            - 8547:8547 # GraphQL
+            - 30303:30303 # UPnP
+        env_file:
+            - ../.config.env
+        command: "--http \
+        --http.addr 0.0.0.0 \
+        --datadir /data \
+        --keystore /keystore \
+        --syncmode ${GETH_SYNC_MODE} \
+        --cache ${GETH_CACHE_MB} \
+        --cache.database ${GETH_CACHE_PERCENT_DB}
+        --cache.trie ${GETH_CACHE_PERCENT_TRIE} \
+        --cache.gc ${GETH_CACHE_PERCENT_GC} \
+        --gcmode ${GETH_GC_MODE} \
+        --maxpeers ${GETH_MAX_PEERS} \
+        --ethash.cachesinmem ${GETH_ETHASH_CACHESINMEM} \
+        --ethash.cachesondisk ${GETH_ETHASH_CACHESONDISK} \
+        --ethash.dagsinmem ${GETH_DAGS_INMEM} \
+        --ethash.dagsondisk ${GETH_DAGS_ONDISK} \
+        --txlookuplimit ${GETH_TX_LOOKUP_LIMIT} \
+        --metrics \
+        --metrics.influxdb.endpoint http://influxdb:8086 \
+        --metrics.influxdb.username ${INFLUXDB_USERNAME} \
+        --metrics.influxdb.password ${INFLUXDB_PASSWORD} \
+        --metrics.influxdb.database geth \
+        --verbosity ${GETH_LOG_VERBOSITY_LEVEL} \
+        --ipcpath /ipc/geth.ipc \
+        --nousb"
+        volumes:
+            - ${KEYSTORE_DIR}:/keystore
+            - ${GETH_DATA_DIR}:/data
+            - ${GETH_IPC_DIR}:/ipc
+        networks:
+            - default
+
+networks:
+    default:
+        driver: bridge

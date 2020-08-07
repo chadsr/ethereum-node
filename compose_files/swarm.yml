@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+    swarm:
+        build:
+            context: ../swarm
+            dockerfile: Dockerfile
+        image: swarm
+        container_name: swarm
+        restart: always
+        ports:
+            - 8548:8546 # Websocket RPC
+            - 8500:8500 # HTTP
+            - 30399:30399 # UPnP
+        env_file:
+            - ../.config.env
+        command: "--datadir /data \
+        --keystore /keystore \
+        --ens-api /ipc/geth.ipc \
+        --store.path /data \
+        --store.size ${SWARM_STORE_SIZE} \
+        --store.cache.size ${SWARM_STORE_CACHE_SIZE} \
+        --maxpeers ${SWARM_MAX_PEERS} \
+        --httpaddr ${SWARM_HTTP_ADDRESS} \
+        --debug \
+        --metrics \
+        --metrics.influxdb.endpoint http://influxdb:8086 \
+        --metrics.influxdb.username ${INFLUXDB_USERNAME} \
+        --metrics.influxdb.password ${INFLUXDB_PASSWORD} \
+        --metrics.influxdb.database swarm \
+        --verbosity ${SWARM_LOG_VERBOSITY_LEVEL} \
+        --bzzaccount ${ETH_ACCOUNT} \
+        --password /password/${ACCOUNT_PASSWORD_FILE_NAME}"
+        volumes:
+            - ${ACCOUNT_PASSWORD_DIR}:/password
+            - ${KEYSTORE_DIR}:/keystore
+            - ${SWARM_DATA_DIR}:/data
+            - ${GETH_IPC_DIR}:/ipc
+        networks:
+            - default
+
+networks:
+    default:
+        driver: bridge
