@@ -7,3 +7,6 @@ url = https://github.com/ethersphere/swarm.git
 [submodule "grafana-provisioning/dashboards/swarm-dashboards"]
 	path = grafana-provisioning/dashboards/swarm-dashboards
 	url = https://github.com/ethersphere/grafana-dashboards.git
+[submodule "bee"]
+	path = bee
+	url = git@github.com:ethersphere/bee.git
